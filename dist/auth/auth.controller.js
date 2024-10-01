@@ -28,19 +28,21 @@ let AuthController = class AuthController {
     async authLogin(req, res) {
         const token = await this.authService.login(req.user);
         res.cookie('TOKENUSER', token.access_token, {
-            httpOnly: true, // Permite acceso desde JavaScript en el cliente
-            secure: false, // Solo HTTPS en producción
-            sameSite: 'none', // Protección contra CSRF
-            maxAge: 1421000, // 1 hora
+            httpOnly: true,
+            secure: true, // Siempre usa HTTPS
+            sameSite: 'strict', // Cambia a 'lax' si 'strict' causa problemas
+            maxAge: 3600000, // 1 hora
+            path: '/',
         });
         return { message: "Login successful", token: token.access_token, username: req.user.username };
     }
     async logout(req, res) {
         res.cookie('TOKENUSER', '', {
-            httpOnly: true, // Permite acceso desde JavaScript en el cliente
-            secure: false, // Solo HTTPS en producción
-            sameSite: 'none', // Protección contra CSRF
+            httpOnly: true,
+            secure: true, // Siempre usa HTTPS
+            sameSite: 'strict', // Cambia a 'lax' si 'strict' causa problemas
             maxAge: 0, // 1 hora
+            path: '/',
         });
         res.status(200).json({ message: 'Logout successful' });
     }
