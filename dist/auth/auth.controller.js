@@ -30,7 +30,7 @@ let AuthController = class AuthController {
         res.cookie('TOKENUSER', token.access_token, {
             httpOnly: false,
             secure: this.configService.get('NODE_ENV') === 'production',
-            sameSite: 'strict',
+            sameSite: 'none',
             maxAge: 3600000,
             path: '/',
         });
@@ -40,7 +40,7 @@ let AuthController = class AuthController {
         res.cookie('TOKENUSER', '', {
             httpOnly: false,
             secure: this.configService.get('NODE_ENV') === 'production',
-            sameSite: 'strict',
+            sameSite: 'none',
             maxAge: 0,
             path: '/',
         });
