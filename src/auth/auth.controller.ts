@@ -27,7 +27,7 @@ export class AuthController {
     res.cookie('TOKENUSER', token.access_token, {
       httpOnly: true,
       secure: true, // Siempre usa HTTPS
-      sameSite: 'strict', // Cambia a 'lax' si 'strict' causa problemas
+      sameSite: 'none', // Cambia a 'lax' si 'strict' causa problemas
       maxAge: 3600000, // 1 hora
       path: '/',
     });
@@ -43,7 +43,7 @@ export class AuthController {
     res.cookie('TOKENUSER', '', {
       httpOnly: true,
       secure: true, // Siempre usa HTTPS
-      sameSite: 'strict', // Cambia a 'lax' si 'strict' causa problemas
+      sameSite: 'none', // Cambia a 'lax' si 'strict' causa problemas
       maxAge: 0, // 1 hora
       path: '/',
     });
