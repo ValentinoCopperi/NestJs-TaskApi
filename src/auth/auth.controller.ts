@@ -25,9 +25,9 @@ export class AuthController {
     const token = await this.authService.login(req.user);
 
     res.cookie('TOKENUSER', token.access_token, {
-      httpOnly: true,
-      secure: true, // Siempre usa HTTPS
-      sameSite: 'none', // Cambia a 'lax' si 'strict' causa problemas
+      httpOnly: false,
+      secure: false, // Siempre usa HTTPS
+      sameSite: 'lax', // Cambia a 'lax' si 'strict' causa problemas
       maxAge: 3600000, // 1 hora
       path: '/',
     });
@@ -41,9 +41,9 @@ export class AuthController {
   async logout(@Request() req: any, @Response({ passthrough: true }) res: Res)
   {
     res.cookie('TOKENUSER', '', {
-      httpOnly: true,
-      secure: true, // Siempre usa HTTPS
-      sameSite: 'none', // Cambia a 'lax' si 'strict' causa problemas
+      httpOnly: false,
+      secure: false, // Siempre usa HTTPS
+      sameSite: 'lax', // Cambia a 'lax' si 'strict' causa problemas
       maxAge: 0, // 1 hora
       path: '/',
     });
