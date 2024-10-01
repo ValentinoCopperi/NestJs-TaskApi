@@ -27,9 +27,8 @@ export class AuthController {
     res.cookie('TOKENUSER', token.access_token, {
       httpOnly: false,
       secure: false, // Siempre usa HTTPS
-      sameSite: 'lax', // Cambia a 'lax' si 'strict' causa problemas
+      sameSite: 'none', // Cambia a 'lax' si 'strict' causa problemas
       maxAge: 3600000, // 1 hora
-      path: '/',
     });
 
     return { message: "Login successful" , token : token.access_token , username : req.user.username}
