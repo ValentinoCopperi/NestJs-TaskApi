@@ -25,7 +25,7 @@ export class AuthController {
     const token = await this.authService.login(req.user);
 
     res.cookie('TOKENUSER', token.access_token, {
-      httpOnly: false, // Permite acceso desde JavaScript en el cliente
+      httpOnly: true, // Permite acceso desde JavaScript en el cliente
       secure: this.configService.get('NODE_ENV') === 'production', // Solo HTTPS en producción
       sameSite: 'none', // Protección contra CSRF
       maxAge: 3600000, // 1 hora
@@ -41,7 +41,7 @@ export class AuthController {
   async logout(@Request() req: any, @Response({ passthrough: true }) res: Res)
   {
     res.cookie('TOKENUSER', '', {
-      httpOnly: false, // Permite acceso desde JavaScript en el cliente
+      httpOnly: true, // Permite acceso desde JavaScript en el cliente
       secure: this.configService.get('NODE_ENV') === 'production', // Solo HTTPS en producción
       sameSite: 'none', // Protección contra CSRF
       maxAge: 0, // 1 hora
