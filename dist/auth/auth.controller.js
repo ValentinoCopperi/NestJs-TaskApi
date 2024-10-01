@@ -28,21 +28,19 @@ let AuthController = class AuthController {
     async authLogin(req, res) {
         const token = await this.authService.login(req.user);
         res.cookie('TOKENUSER', token.access_token, {
-            httpOnly: true,
-            secure: false,
-            sameSite: 'lax',
-            maxAge: 3600000,
-            path: '/',
+            httpOnly: true, // Permite acceso desde JavaScript en el cliente
+            secure: false, // Solo HTTPS en producción
+            sameSite: 'none', // Protección contra CSRF
+            maxAge: 1421000, // 1 hora
         });
         return { message: "Login successful", token: token.access_token, username: req.user.username };
     }
     async logout(req, res) {
         res.cookie('TOKENUSER', '', {
-            httpOnly: true,
-            secure: false,
-            sameSite: 'lax',
-            maxAge: 0,
-            path: '/',
+            httpOnly: true, // Permite acceso desde JavaScript en el cliente
+            secure: false, // Solo HTTPS en producción
+            sameSite: 'none', // Protección contra CSRF
+            maxAge: 0, // 1 hora
         });
         res.status(200).json({ message: 'Logout successful' });
     }
@@ -80,7 +78,7 @@ __decorate([
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,
-        config_1.ConfigService,
-        users_service_1.UsersService])
+    config_1.ConfigService,
+    users_service_1.UsersService])
 ], AuthController);
 //# sourceMappingURL=auth.controller.js.map

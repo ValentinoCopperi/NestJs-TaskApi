@@ -26,10 +26,9 @@ export class AuthController {
 
     res.cookie('TOKENUSER', token.access_token, {
       httpOnly: true, // Permite acceso desde JavaScript en el cliente
-      secure: false, // Solo HTTPS en producción
-      sameSite: 'lax', // Protección contra CSRF
-      maxAge: 3600000, // 1 hora
-      path: '/', // Accesible en todo el dominio
+      secure:false, // Solo HTTPS en producción
+      sameSite: 'none', // Protección contra CSRF
+      maxAge: 0, // 1 hora
     });
 
     return { message: "Login successful" , token : token.access_token , username : req.user.username}
@@ -43,9 +42,8 @@ export class AuthController {
     res.cookie('TOKENUSER', '', {
       httpOnly: true, // Permite acceso desde JavaScript en el cliente
       secure:false, // Solo HTTPS en producción
-      sameSite: 'lax', // Protección contra CSRF
+      sameSite: 'none', // Protección contra CSRF
       maxAge: 0, // 1 hora
-      path: '/', // AcceDuración de la cookie en milisegundos (0 para eliminar)
     });
     res.status(200).json({ message: 'Logout successful' });
 
