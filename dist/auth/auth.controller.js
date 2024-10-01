@@ -29,8 +29,8 @@ let AuthController = class AuthController {
         const token = await this.authService.login(req.user);
         res.cookie('TOKENUSER', token.access_token, {
             httpOnly: true,
-            secure: this.configService.get('NODE_ENV') === 'production',
-            sameSite: 'none',
+            secure: false,
+            sameSite: 'lax',
             maxAge: 3600000,
             path: '/',
         });
@@ -39,8 +39,8 @@ let AuthController = class AuthController {
     async logout(req, res) {
         res.cookie('TOKENUSER', '', {
             httpOnly: true,
-            secure: this.configService.get('NODE_ENV') === 'production',
-            sameSite: 'none',
+            secure: false,
+            sameSite: 'lax',
             maxAge: 0,
             path: '/',
         });

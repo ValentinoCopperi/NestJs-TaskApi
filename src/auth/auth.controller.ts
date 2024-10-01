@@ -26,8 +26,8 @@ export class AuthController {
 
     res.cookie('TOKENUSER', token.access_token, {
       httpOnly: true, // Permite acceso desde JavaScript en el cliente
-      secure: this.configService.get('NODE_ENV') === 'production', // Solo HTTPS en producción
-      sameSite: 'none', // Protección contra CSRF
+      secure: false, // Solo HTTPS en producción
+      sameSite: 'lax', // Protección contra CSRF
       maxAge: 3600000, // 1 hora
       path: '/', // Accesible en todo el dominio
     });
@@ -42,8 +42,8 @@ export class AuthController {
   {
     res.cookie('TOKENUSER', '', {
       httpOnly: true, // Permite acceso desde JavaScript en el cliente
-      secure: this.configService.get('NODE_ENV') === 'production', // Solo HTTPS en producción
-      sameSite: 'none', // Protección contra CSRF
+      secure:false, // Solo HTTPS en producción
+      sameSite: 'lax', // Protección contra CSRF
       maxAge: 0, // 1 hora
       path: '/', // AcceDuración de la cookie en milisegundos (0 para eliminar)
     });
