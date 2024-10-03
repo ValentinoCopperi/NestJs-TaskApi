@@ -12,7 +12,7 @@ async function bootstrap() {
     });
     app.useGlobalPipes(new common_1.ValidationPipe());
     app.enableCors({
-        origin: ['http://localhost:3001', 'http://localhost:3000'],
+        origin: ['http://localhost:3001',"https://task-app-valentinocopperi.vercel.app", 'http://localhost:3000'],
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization']
